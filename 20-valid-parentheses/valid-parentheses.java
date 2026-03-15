@@ -1,29 +1,31 @@
 class Solution {
     public boolean isValid(String s) {
-                // since we have to know the last opening, we need to store all the openings, and since we are getting the last entered opening we will use stack
+        HashMap<Character, Character> mappedBrackets = new HashMap<>();
+        Stack<Character> st = new Stack<>();
 
-                Stack<Character> charStack = new Stack<Character>();
+        mappedBrackets.put(')', '(');
+        mappedBrackets.put('}', '{');
+        mappedBrackets.put(']', '[');
 
-                for(char i : s.toCharArray()){
-                    if(i == '(' || i == '{' || i == '['){
-                        charStack.push(i);
-                    }else{
-                        if(charStack.isEmpty()) return false;   // it doesn't have closing bracket
-                        char ch = charStack.pop();
-                        if((ch == '(' && i == ')') || (ch == '{' && i == '}') || (ch == '[' && i == ']')){
-                            continue;
-                        }else{
-                            return false;
-                        }
+        for(int i = 0; i < s.length(); i++){
+            if(!mappedBrackets.containsKey(s.charAt(i))){
+                st.push(s.charAt(i));
+            }else{
+                if(st.isEmpty()){
+                    return false;
+                }else{
+                    char top = st.pop();
+                    if(top != mappedBrackets.get(s.charAt(i))){
+                        return false;
                     }
                 }
+            }
+        }
 
-                if(charStack.isEmpty()){
-                    return true;
-                }else{
-                    return false;
-                }
-
-            
+        if(st.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
