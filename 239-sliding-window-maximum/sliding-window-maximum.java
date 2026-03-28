@@ -9,17 +9,37 @@ class Solution {
         Deque<Integer> dq = new LinkedList<>();
 
         for(int i = 0; i < n; i++){
-            // remove indices that are out of our window
-            while(!dq.isEmpty() && (dq.peek() < (i - k + 1))){
+            // // remove indices that are out of our window
+            // while(!dq.isEmpty() && (dq.peek() < (i - k + 1))){
+            //     dq.poll();
+            // }
+            
+            // // remove indices whose corresponding vlues are less than nums[i]
+            // while(!dq.isEmpty() && nums[dq.peekLast()] < nums[i]){
+            //     dq.pollLast();
+            // }
+
+            // // add current index to deque
+            // dq.offer(i);
+
+            // if(i >= k-1){
+            //     result[i-k+1] = nums[dq.peek()];
+            // }
+
+
+
+
+
+
+
+            while(!dq.isEmpty() && dq.peek() < i-k+1){
                 dq.poll();
             }
-            
-            // remove indices whose corresponding vlues are less than nums[i]
+
             while(!dq.isEmpty() && nums[dq.peekLast()] < nums[i]){
                 dq.pollLast();
             }
 
-            // add current index to deque
             dq.offer(i);
 
             if(i >= k-1){
