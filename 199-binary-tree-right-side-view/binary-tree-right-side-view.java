@@ -14,40 +14,36 @@
  * }
  */
 class Solution {
-
-    private void recursionRight(TreeNode root, int level, List<Integer> res) {
-        // Check if the current node is null
-        if (root == null) {
-            return;
-        }
-
-        // Check if the size of the result list
-        // is equal to the current level
-        if (res.size() == level) {
-            // If equal, add the value of the
-            // current node to the result list
-            res.add(root.val);
-        }
-
-
-        // Recursively call the function for the
-        // right child with an increased level
-        recursionRight(root.right, level + 1, res);
-
-        // Recursively call the function for the
-        // left child with an increased level
-        recursionRight(root.left, level + 1, res);
-    }
-
-
     public List<Integer> rightSideView(TreeNode root) {
-        // List to store the result
-        List<Integer> res = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
 
-        // Call the recursive function
-        // to populate the left-side view
-        recursionRight(root, 0, res);
+        if(root == null){
+            return result;
+        }
 
-        return res;
+        Queue<TreeNode> queue = new LinkedList();
+        queue.add(root);
+
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
+
+            for(int i = 0; i < levelSize; i++){
+                TreeNode currentNode = queue.poll();
+                if(i == levelSize-1){
+                    result.add(currentNode.val);
+                }
+
+                if(currentNode.left != null){
+                    queue.add(currentNode.left);
+                }
+
+
+                if(currentNode.right != null){
+                    queue.add(currentNode.right);
+                }
+            }
+        }
+
+        return result;
     }
 }
