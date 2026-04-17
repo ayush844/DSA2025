@@ -9,87 +9,43 @@
  */
 public class Codec {
 
+    public String recSerialize(TreeNode node, String str){
+        if(node == null){
+            str += "null,";
+        }else{
+            str += String.valueOf(node.val) + ",";
+            str = recSerialize(node.left, str);
+            str = recSerialize(node.right, str);
+        }
 
+        return str;
+    }
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
+        return recSerialize(root, "");
+    }
 
-        if(root == null){
-            return "";
+    public TreeNode recDeserialize(List<String> str){
+        if (str.get(0).equals("null")){
+            str.remove(0);
+            return null;
         }
 
-        StringBuilder sb = new StringBuilder();
+        TreeNode root = new TreeNode(Integer.valueOf(str.get(0)));
+        str.remove(0);
+        root.left = recDeserialize(str);
+        root.right = recDeserialize(str);
 
-        Queue<TreeNode> q = new LinkedList<>();
-
-        q.add(root);
-
-        while (!q.isEmpty()){
-            TreeNode currNode = q.poll();
-
-            if(currNode == null){
-                sb.append("#,");
-            }else{
-                sb.append(currNode.val).append(",");
-
-                q.add(currNode.left);
-                q.add(currNode.right);
-            }
-
-        }
-
-        return sb.toString();
-
+        return root;
     }
 
     // Decodes your encoded data to tree.
-public TreeNode deserialize(String data) {
-    if (data.isEmpty()) {
-        return null;
+    public TreeNode deserialize(String data) {
+        String[] strArray = data.split(",");
+        List<String> strList = new LinkedList<String>(Arrays.asList(strArray));
+        return recDeserialize(strList);
     }
-
-    StringBuilder s = new StringBuilder(data);
-
-    int commaIndex = s.indexOf(",");
-    String str = s.substring(0, commaIndex);
-    s.delete(0, commaIndex + 1);
-
-    TreeNode root = new TreeNode(Integer.parseInt(str));
-    Queue<TreeNode> q = new LinkedList<>();
-    q.offer(root);
-
-    while (!q.isEmpty()) {
-        TreeNode node = q.poll();
-
-        // Parse left node
-        commaIndex = s.indexOf(",");
-        if (commaIndex == -1) break;
-        str = s.substring(0, commaIndex);
-        s.delete(0, commaIndex + 1);
-
-        if (!str.equals("#")) {
-            TreeNode leftNode = new TreeNode(Integer.parseInt(str));
-            node.left = leftNode;
-            q.offer(leftNode);
-        }
-
-        // Parse right node
-        commaIndex = s.indexOf(",");
-        if (commaIndex == -1) break;
-        str = s.substring(0, commaIndex);
-        s.delete(0, commaIndex + 1);
-
-        if (!str.equals("#")) {
-            TreeNode rightNode = new TreeNode(Integer.parseInt(str));
-            node.right = rightNode;
-            q.offer(rightNode);
-        }
-    }
-
-    return root;
-}
-
-
 }
 
 // Your Codec object will be instantiated and called as such:
