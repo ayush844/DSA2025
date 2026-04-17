@@ -22,11 +22,10 @@ class Solution {
             return 0;
         }
 
-        int leftGain = Math.max(maxGain(node.left), 0);
-        int rightGain = Math.max(maxGain(node.right), 0);
+        int leftGain  = Math.max(maxGain(node.left), 0);
+        int rightGain  = Math.max(maxGain(node.right), 0);
 
-        int pathSum = leftGain + rightGain + node.val;
-
+        int pathSum = node.val + leftGain + rightGain;
         max_sum = Math.max(max_sum, pathSum);
 
         return node.val + Math.max(leftGain, rightGain);
