@@ -1,15 +1,11 @@
 class Solution:
     def findTheWinner(self, n: int, k: int) -> int:
-        arr = [i+1 for i in range(n)]
-
-        def helper(arr, start_index):
-            if len(arr) == 1:
-                return arr[0]
-
-            index_to_delete = (start_index + k - 1) % len(arr)
-
-            del arr[index_to_delete]
-
-            return helper(arr, index_to_delete)
         
-        return helper(arr, 0)
+        def josephus(n):
+            if n==1:
+                return 0
+
+            return (josephus(n-1) + k) % n
+
+        return josephus(n) + 1
+        
