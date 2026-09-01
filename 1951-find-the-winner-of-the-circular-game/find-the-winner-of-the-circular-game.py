@@ -1,9 +1,8 @@
 class Solution:
     def findTheWinner(self, n: int, k: int) -> int:
+        survivor = 0
 
-        return self.winner(n, k)+1
+        for i in range(2, n+1):
+            survivor = (survivor+k)%i
 
-    def winner(self, n, k):
-        if n == 1:
-            return 0
-        return (self.winner(n-1, k)+k)%n
+        return survivor+1
