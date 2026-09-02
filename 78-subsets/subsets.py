@@ -1,23 +1,19 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        
+        n = len(nums)
         res = []
-        subset = []
+        curr = []
 
         def helper(index):
-            if index == len(nums):
-                res.append(subset[:])
+            if index == n:
+                res.append(curr[:])
                 return
-            # exclude
+            
             helper(index+1)
-
-            # include
-            subset.append(nums[index])
-            helper(index + 1)
-
-            # backtrack our changes
-            subset.pop()
-
+            curr.append(nums[index])
+            helper(index+1)
+            curr.pop()
 
         helper(0)
+
         return res
