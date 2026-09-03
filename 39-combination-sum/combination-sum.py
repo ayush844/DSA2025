@@ -1,22 +1,21 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        n = len(candidates)
 
         res = []
-        sub = []
+        curr = []
 
         def helper(index, remaining):
+            if remaining < 0 or index >= n:
+                return
             if remaining == 0:
-                res.append(sub[:])
+                res.append(curr[:])
                 return
-            if remaining < 0:
-                return
-            
-            for i in range(index, len(candidates)):
-                sub.append(candidates[i])
-                helper(i, remaining - candidates[i])
-                sub.pop()
-        
-        helper(0, target)
 
+            for i in range(index, n):
+                curr.append(candidates[i])
+                helper(i, remaining-candidates[i])
+                curr.pop()
+
+        helper(0, target)
         return res
-        
