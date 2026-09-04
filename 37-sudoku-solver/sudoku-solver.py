@@ -1,89 +1,45 @@
 class Solution:
     def solveSudoku(self, board: List[List[str]]) -> None:
+        used_row = [set() for _ in range(9)]
+        used_col = [set() for _ in range(9)]
+        used_box = [set() for _ in range(9)]
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] != ".":
+                    val = int(board[i][j])
+                    used_row[i].add(val)
+                    used_col[j].add(val)
+                    box_id = (i // 3) * 3 + (j // 3)
+                    used_box[box_id].add(val)
 
-        boxes = [{} for _ in range(9)]
-        rows = [{} for _ in range(9)]
-        cols = [{} for _ in range(9)]
+        def is_valid(i, j, val):
+            box_id = (i // 3) * 3 + (j // 3)
+            return val not in used_box[box_id] and val not in used_row[i] and val not in used_col[j]
 
-        def getBox(row, col):
-            return (row // 3) * 3 + col // 3
-
-        # Build lookup tables
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] != '.':
-                    num = board[r][c]
-                    box = getBox(r, c)
-
-                    boxes[box][num] = True
-                    rows[r][num] = True
-                    cols[c][num] = True
-
-        def solveBacktrack():
-
-            # Find the empty cell with the fewest choices
-            best_row = -1
-            best_col = -1
-            best_choices = None
-
-            for r in range(9):
-                for c in range(9):
-
-                    if board[r][c] != '.':
-                        continue
-
-                    box = getBox(r, c)
-
-                    choices = []
-
-                    for num in '123456789':
-                        if (num not in rows[r] and
-                            num not in cols[c] and
-                            num not in boxes[box]):
-                            choices.append(num)
-
-                    # No possible number → this branch is impossible
-                    if not choices:
-                        return False
-
-                    # Keep the cell with minimum choices
-                    if best_choices is None or len(choices) < len(best_choices):
-                        best_choices = choices
-                        best_row = r
-                        best_col = c
-
-                        # Can't do better than one choice
-                        if len(choices) == 1:
-                            break
-
-                if best_choices is not None and len(best_choices) == 1:
-                    break
-
-            # No empty cells → solved
-            if best_choices is None:
+        def dfs(i, j):
+            if i == 9:
                 return True
+            next_i = next_j = 0
+            if j < 8:
+                next_i, next_j = i, j+1
+            elif j == 8:
+                next_i, next_j = i+1, 0
+            if board[i][j] != ".":
+                return dfs(next_i, next_j)
 
-            r = best_row
-            c = best_col
-            box = getBox(r, c)
-
-            for num in best_choices:
-
-                # Place
-                board[r][c] = num
-                rows[r][num] = True
-                cols[c][num] = True
-                boxes[box][num] = True
-
-                if solveBacktrack():
-                    return True
-
-                # Backtrack
-                board[r][c] = '.'
-                del rows[r][num]
-                del cols[c][num]
-                del boxes[box][num]
-
+            box_id = (i // 3) * 3 + (j // 3)
+            for x in range(1, 10):
+                if is_valid(i, j, x):
+                    board[i][j] = str(x)
+                    used_row[i].add(x)
+                    used_col[j].add(x)
+                    used_box[box_id].add(x)
+                    if dfs(next_i, next_j):
+                        return True
+                    board[i][j] = "."
+                    used_row[i].remove(x)
+                    used_col[j].remove(x)
+                    used_box[box_id].remove(x)
             return False
-
-        solveBacktrack()
+        dfs(0, 0)
+        return
