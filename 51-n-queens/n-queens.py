@@ -1,41 +1,37 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        
-        res = []
         board = [['.']*n for _ in range(n)]
+        results = []
 
-        def convertBoard(board):
+        def convert_board(board):
             return [''.join(row) for row in board]
 
-        def isValid(row, col, board):
-            # column check
+        def is_valid(row, col, board):
+
             for i in range(row):
-                if board[i][col] == 'Q':
+                if board[i][col]=='Q':
                     return False
-            
-            # top left diagonal
-            for r, c in zip(range(row-1, -1, -1), range(col-1, -1, -1)):
-                if board[r][c] == 'Q':
+
+            for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+                if board[i][j] == 'Q':
                     return False
-            # top right diagonal
-            for r, c in zip(range(row-1, -1, -1), range(col+1, n)):
-                if board[r][c] == 'Q':
+
+            for i, j in zip(range(row, -1, -1), range(col, n)):
+                if board[i][j] == 'Q':
                     return False
-            
+
             return True
 
-
-        def placeNextQueen(board, row):
+        def place_next_queen(board, row):
             if row == n:
-                res.append(convertBoard(board))
+                results.append(convert_board(board))
                 return
-
             for col in range(n):
-                if isValid(row, col, board):
+                if is_valid(row, col, board):
                     board[row][col] = 'Q'
-                    placeNextQueen(board, row + 1)
+                    place_next_queen(board, row+1)
                     board[row][col] = '.'
 
-
-        placeNextQueen(board, 0)
-        return res
+        place_next_queen(board, 0)
+        
+        return results
