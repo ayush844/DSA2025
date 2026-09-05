@@ -12,6 +12,6 @@ class Solution:
 
         for num in nums:
             for curr_sum in range(target, num-1, -1):
-                dp[curr_sum] = dp[curr_sum] or dp[curr_sum - num]
+                dp[curr_sum] = dp[curr_sum] or dp[curr_sum-num]
 
         return dp[target]
