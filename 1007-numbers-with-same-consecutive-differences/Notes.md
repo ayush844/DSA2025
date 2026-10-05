@@ -1,0 +1,1 @@
+<h2>numbers-with-same-consecutive-differences Notes</h2><hr>[ Time taken: 2d 21hrs 56m 52s ]
