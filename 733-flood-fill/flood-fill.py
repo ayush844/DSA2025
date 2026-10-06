@@ -1,16 +1,16 @@
 class Solution:
     def floodFill(self, image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:
         original = image[sr][sc]
+        row_len = len(image)
+        col_len = len(image[0])
+
         if original == color:
             return image
-        
-        rows = len(image)
-        columns = len(image[0])
 
         def dfs(row, col):
-            if row < 0 or row >= rows or col < 0 or col >= columns:
-                return
-
+            if row < 0 or row >= row_len or col < 0 or col >= col_len:
+                return False
+            
             if image[row][col] != original:
                 return
 
