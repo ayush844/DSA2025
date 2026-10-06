@@ -4,18 +4,17 @@ class Solution:
         visited = set([0])
 
         for key in rooms[0]:
-            if key not in visited:
-                q.append(key)
-                visited.add(key)
+            q.append(key)
+            visited.add(key)
 
         while q:
-            i = q.popleft()
-            for key in rooms[i]:
+            room_num = q.popleft()
+            for key in rooms[room_num]:
                 if key not in visited:
-                    q.append(key)
                     visited.add(key)
+                    q.append(key)
 
         if len(visited) == len(rooms):
             return True
-
+        
         return False
