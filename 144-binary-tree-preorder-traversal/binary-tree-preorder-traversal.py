@@ -8,16 +8,15 @@ class Solution:
     def preorderTraversal(self, root: TreeNode | None) -> list[int]:
         if not root:
             return []
-        array = []
-        current = root
 
+        output = []
         def traverse(node):
-            array.append(node.val)
-            if node.left:
-                traverse(node.left)
-            if node.right:
-                traverse(node.right)
-        
-        traverse(current)
+            if not node:
+                return
+            output.append(node.val)
+            traverse(node.left)
+            traverse(node.right)
 
-        return array
+        traverse(root)
+
+        return output
