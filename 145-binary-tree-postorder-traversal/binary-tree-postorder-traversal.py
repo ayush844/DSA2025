@@ -8,16 +8,17 @@ class Solution:
     def postorderTraversal(self, root: TreeNode | None) -> list[int]:
         if not root:
             return []
-        array = []
-        current = root
 
+        output = []
         def traverse(node):
-            if node.left:
-                traverse(node.left)
-            if node.right:
-                traverse(node.right)
-            array.append(node.val)
-        
-        traverse(current)
+            if not node:
+                return
 
-        return array
+            traverse(node.left)
+            traverse(node.right)
+            
+            output.append(node.val)
+
+        traverse(root)
+
+        return output
