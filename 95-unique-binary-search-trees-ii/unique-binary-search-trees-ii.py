@@ -25,4 +25,5 @@ class Solution:
 
             return trees
 
+
         return generate(1, n)
