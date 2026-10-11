@@ -8,23 +8,26 @@ class Node:
 
 class Solution:
     def levelOrder(self, root: 'Node') -> List[List[int]]:
+        queue = deque([root])
+
+        result = []
+
         if not root:
             return []
 
-        queue = deque([root])
-        result = []
-
         while queue:
             length = len(queue)
-            curr_level = []
+            count = 0
+            level = []
 
-            for _ in range(length):
+            while count < length:
                 node = queue.popleft()
-                curr_level.append(node.val)
+                level.append(node.val)
+                count+=1
 
                 for child in node.children:
                     queue.append(child)
 
-            result.append(curr_level)
+            result.append(level)
 
         return result
