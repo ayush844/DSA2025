@@ -1,7 +1,6 @@
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
         zeroes = []
-        non_zero = []
         n = len(nums)
         product = 1
 
@@ -9,7 +8,6 @@ class Solution:
             if nums[i] == 0:
                 zeroes.append(i)
             else:
-                non_zero.append(i)
                 product*=nums[i]
 
         res = []
