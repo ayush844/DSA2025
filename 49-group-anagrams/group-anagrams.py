@@ -1,16 +1,15 @@
 class Solution:
     def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
-        if len(strs) == 0:
-            return []
+        n = len(strs)
 
         sorted_strs = ["".join(sorted(text)) for text in strs]
 
-        ht = {}
+        hash_map = {}
 
         for i, text in enumerate(sorted_strs):
-            if text in ht:
-                ht[text].append(strs[i])
+            if text in hash_map:
+                hash_map[text].append(strs[i])
             else:
-                ht[text] = [strs[i]]
+                hash_map[text] = [strs[i]]
 
-        return list(ht.values())
+        return list(hash_map.values())
