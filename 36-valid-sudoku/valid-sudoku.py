@@ -21,9 +21,9 @@ class Solution:
                         else:
                             col_hash[j].add(board[i][j])
                     else:
-                            col_hash[j] = set([board[i][j]])
+                        col_hash[j] = set([board[i][j]])
 
-                    box_key = str(i//3) + 'x' + str(j//3)
+                    box_key = str(i//3) + 'X' + str(j//3)
                     if box_key in box_hash:
                         if board[i][j] in box_hash[box_key]:
                             return False
@@ -31,5 +31,7 @@ class Solution:
                             box_hash[box_key].add(board[i][j])
                     else:
                         box_hash[box_key] = set([board[i][j]])
+
+                    
 
         return True
