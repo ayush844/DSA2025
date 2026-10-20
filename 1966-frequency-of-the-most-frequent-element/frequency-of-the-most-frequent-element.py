@@ -2,14 +2,14 @@ class Solution:
     def maxFrequency(self, nums: list[int], k: int) -> int:
         nums.sort()
         left = 0
-        n = len(nums)
         total = 0
         res = 0
+        n = len(nums)
 
         for right in range(n):
             total += nums[right]
-
-            while nums[right]*(right-left+1) > total+k:
+            
+            while nums[right]*(right-left+1) > total + k:
                 total -= nums[left]
                 left+=1
 
