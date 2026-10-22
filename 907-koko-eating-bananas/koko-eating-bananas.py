@@ -1,26 +1,23 @@
 class Solution:
-    def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        m = max(piles)
-        n = len(piles)
+    def minEatingSpeed(self, piles: list[int], h: int) -> int:
+        max_banana = max(piles)
 
-        min_ans = m
+        low = 1
+        high = max_banana
+        res = max_banana
 
-        def isValid(num):
-            sum = 0
+        def isValid(speed):
+            total_time = 0
             for pile in piles:
-                sum+=math.ceil(pile/num)
+                total_time += math.ceil(pile / speed)
+            return total_time <= h
 
-            return sum <= h
-
-        left = 1
-        right = m
-
-        while left <= right:
-            middle = (left+right)//2
-            if isValid(middle):
-                min_ans = min(min_ans, middle)
-                right = middle-1
+        while low <= high:
+            mid = (low+high)//2
+            if isValid(mid):
+                res = mid
+                high = mid-1
             else:
-                left = middle+1
+                low = mid+1
 
-        return min_ans
+        return res
