@@ -11,8 +11,7 @@ class Solution:
 
         for i in range(m):
             ch = s1[i]
-            count_1[ch] = count_1.get(ch, 0)+1
-
+            count_1[ch] = count_1.get(ch, 0) + 1
 
         for i in range(m):
             ch = s2[i]
@@ -25,11 +24,11 @@ class Solution:
             ch = s2[i]
             count_2[ch] = count_2.get(ch, 0) + 1
 
-            left = s2[i-m]
-            count_2[left]-=1
+            left_ch = s2[i-m]
+            count_2[left_ch] -= 1
 
-            if count_2[left] == 0:
-                del count_2[left]
+            if count_2[left_ch] == 0:
+                del count_2[left_ch]
 
             if count_1 == count_2:
                 return True
