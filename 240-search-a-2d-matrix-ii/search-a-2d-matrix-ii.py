@@ -13,8 +13,8 @@ class Solution:
             if matrix[row][col] == target:
                 return True
             elif matrix[row][col] > target:
-                col-=1
+                col -= 1
             else:
-                row+=1
+                row += 1
 
         return False
