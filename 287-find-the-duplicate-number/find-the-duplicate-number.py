@@ -8,9 +8,11 @@ class Solution:
             tortoise = nums[tortoise]
 
             if hare == tortoise:
-                tortoise = 0
-                while tortoise != hare:
-                    tortoise = nums[tortoise]
+                hare = 0
+                while hare!=tortoise:
                     hare = nums[hare]
+                    tortoise = nums[tortoise]
 
-                return tortoise
+                return hare
+
+        return None
