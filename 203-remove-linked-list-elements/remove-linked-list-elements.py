@@ -8,9 +8,8 @@ class Solution:
         if not head:
             return None
 
-        dummy = ListNode(0)
+        dummy = ListNode(0, head)
         curr = dummy
-        curr.next = head
 
         while curr:
             while curr.next and curr.next.val == val:
