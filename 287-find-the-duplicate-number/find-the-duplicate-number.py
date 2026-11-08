@@ -4,12 +4,12 @@ class Solution:
         tortoise = 0
 
         while True:
-            hare = nums[nums[hare]]
-            tortoise = nums[tortoise]
+            hare = nums[hare]
+            tortoise = nums[nums[tortoise]]
 
             if hare == tortoise:
                 hare = 0
-                while hare!=tortoise:
+                while hare != tortoise:
                     hare = nums[hare]
                     tortoise = nums[tortoise]
 
