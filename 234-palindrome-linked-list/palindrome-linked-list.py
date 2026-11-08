@@ -14,13 +14,13 @@ class Solution:
 
         curr = slow.next
         slow.next = None
-
         prev = None
+
         while curr:
-            tmp = curr.next
+            temp = curr.next
             curr.next = prev
             prev = curr
-            curr = tmp
+            curr = temp
 
         left = head
         right = prev
@@ -28,7 +28,7 @@ class Solution:
         while right:
             if left.val != right.val:
                 return False
-
+            
             left = left.next
             right = right.next
 
