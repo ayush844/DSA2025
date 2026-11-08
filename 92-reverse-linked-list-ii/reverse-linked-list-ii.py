@@ -14,10 +14,9 @@ class Solution:
         curr = prev.next
 
         for _ in range(right-left):
-            temp = curr.next
-            curr.next = temp.next
-            temp.next = prev.next
-            prev.next = temp
+            tmp = curr.next
+            curr.next = tmp.next
+            tmp.next = prev.next
+            prev.next = tmp
 
         return dummy.next
-        
