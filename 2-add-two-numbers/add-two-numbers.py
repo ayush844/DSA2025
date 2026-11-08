@@ -11,13 +11,12 @@ class Solution:
 
         while l1 or l2 or carry:
             total = 0
-
             if l1:
-                total+=l1.val
+                total += l1.val
                 l1 = l1.next
 
             if l2:
-                total+=l2.val
+                total += l2.val
                 l2 = l2.next
 
             total+=carry
