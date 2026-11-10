@@ -10,6 +10,7 @@ class Solution:
             return []
 
         output = []
+
         def traverse(node):
             if not node:
                 return
@@ -18,5 +19,4 @@ class Solution:
             traverse(node.right)
 
         traverse(root)
-
         return output
