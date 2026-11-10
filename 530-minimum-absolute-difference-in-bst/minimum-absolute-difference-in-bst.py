@@ -9,21 +9,20 @@ class Solution:
         prev = None
         min_diff = float('inf')
 
-        def inorder(node):
-
+        def inorder(root):
             nonlocal prev, min_diff
 
-            if not node:
+            if not root:
                 return
 
-            inorder(node.left)
+            inorder(root.left)
 
             if prev:
-                min_diff = min(min_diff, node.val - prev.val)
+                min_diff = min(min_diff, root.val - prev.val)
 
-            prev = node
+            prev = root
 
-            inorder(node.right)
+            inorder(root.right)
 
         inorder(root)
 
