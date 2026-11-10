@@ -10,16 +10,14 @@ class Solution:
             return []
 
         output = []
+
         def traverse(node):
             if not node:
                 return
 
             traverse(node.left)
-            
             output.append(node.val)
-            
             traverse(node.right)
 
         traverse(root)
-
         return output
