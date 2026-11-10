@@ -10,6 +10,7 @@ class Solution:
             return None
 
         tree = root
+
         while tree:
             if tree.val == val:
                 return tree
