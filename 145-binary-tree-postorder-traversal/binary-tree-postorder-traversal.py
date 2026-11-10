@@ -9,14 +9,16 @@ class Solution:
         if not root:
             return []
 
+        tree = root
+
         output = []
+
         def traverse(node):
             if not node:
                 return
-
+            
             traverse(node.left)
             traverse(node.right)
-            
             output.append(node.val)
 
         traverse(root)
