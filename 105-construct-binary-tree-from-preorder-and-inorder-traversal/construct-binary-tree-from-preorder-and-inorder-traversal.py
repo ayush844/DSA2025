@@ -12,7 +12,7 @@ class Solution:
 
         def helper(start, end):
             nonlocal idx
-            
+
             if start > end:
                 return None
 
@@ -24,6 +24,7 @@ class Solution:
             mid = inorder_idx[node_val]
             node.left = helper(start, mid-1)
             node.right = helper(mid+1, end)
+
 
             return node
 
