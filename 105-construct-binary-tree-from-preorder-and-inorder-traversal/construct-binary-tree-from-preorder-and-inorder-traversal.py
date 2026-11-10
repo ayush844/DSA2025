@@ -6,19 +6,22 @@
 #         self.right = right
 class Solution:
     def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode | None:
-        inorder_map = {val: i for i, val in enumerate(inorder)}
+        inorder_idx = {val: i for i, val in enumerate(inorder)}
         n = len(inorder)
-        index = 0
+        idx = 0
 
         def helper(start, end):
-            nonlocal index
+            nonlocal idx
+            
             if start > end:
                 return None
 
-            node_val = preorder[index]
+            node_val = preorder[idx]
             node = TreeNode(node_val)
-            index+=1
-            mid = inorder_map[node_val]
+
+            idx+=1
+
+            mid = inorder_idx[node_val]
             node.left = helper(start, mid-1)
             node.right = helper(mid+1, end)
 
