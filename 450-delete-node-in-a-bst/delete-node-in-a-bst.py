@@ -11,17 +11,18 @@ class Solution:
 
         tree = root
 
-        if tree.val > key:
-            tree.left = self.deleteNode(tree.left, key)
-        elif tree.val < key:
+        if tree.val < key:
             tree.right = self.deleteNode(tree.right, key)
+        elif tree.val > key:
+            tree.left = self.deleteNode(tree.left, key)
         else:
             if not tree.left:
                 return tree.right
             if not tree.right:
                 return tree.left
-        
+
             next = tree.right
+
             while next.left:
                 next = next.left
 
