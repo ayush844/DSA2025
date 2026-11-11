@@ -11,24 +11,28 @@ class Solution:
 
         queue = deque([(root, 0, 0)])
 
-        columns = {}
+        column = {}
 
         while queue:
             node, row, col = queue.popleft()
-            if col not in columns:
-                columns[col] = []
-            columns[col].append((row, node.val))
-            if node.left: queue.append((node.left, row+1, col-1))
-            if node.right: queue.append((node.right, row+1, col+1))
+            if col not in column:
+                column[col] = []
+
+            column[col].append((row, node.val))
+            if node.left:
+                queue.append((node.left, row+1, col-1))
+            if node.right:
+                queue.append((node.right, row+1, col+1))
 
         output = []
 
-        for col in sorted(columns):
-            columns[col].sort()
-            value = []
-            for row, node in columns[col]:
-                value.append(node)
+        for col in sorted(column):
+            column[col].sort()
 
-            output.append(value)
+            values = []
+            for row, node in column[col]:
+                values.append(node)
+
+            output.append(values)
 
         return output
