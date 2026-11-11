@@ -16,10 +16,10 @@ class Solution:
             left_ht = dfs(node.left)
             right_ht = dfs(node.right)
 
-            diameter = left_ht + right_ht + 2
+            diameter = left_ht+right_ht+2
             max_diam = max(max_diam, diameter)
 
-            return max(left_ht, right_ht)+1
+            return max(left_ht, right_ht) + 1
 
         dfs(root)
 
