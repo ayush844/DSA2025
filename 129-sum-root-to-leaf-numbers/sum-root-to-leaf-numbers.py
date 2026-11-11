@@ -17,5 +17,4 @@ class Solution:
 
             return dfs(node.left, curr_num) + dfs(node.right, curr_num)
 
-
         return dfs(root, 0)
