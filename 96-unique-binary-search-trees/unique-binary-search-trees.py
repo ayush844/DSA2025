@@ -9,6 +9,7 @@ class Solution:
             for root in range(total):
                 left = root
                 right = total - root - 1
+
                 dp[total] += dp[left]*dp[right]
 
         return dp[n]
