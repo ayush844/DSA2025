@@ -10,10 +10,10 @@ class Solution:
     def levelOrder(self, root: 'Node') -> List[List[int]]:
         queue = deque([root])
 
-        result = []
-
         if not root:
             return []
+
+        res = []
 
         while queue:
             length = len(queue)
@@ -28,6 +28,7 @@ class Solution:
                 for child in node.children:
                     queue.append(child)
 
-            result.append(level)
+            res.append(level)
 
-        return result
+
+        return res
