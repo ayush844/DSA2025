@@ -15,9 +15,9 @@ class Solution:
                 if not stack:
                     return False
 
-                lst_ch = stack.pop()
-
-                if lst_ch != mapped_brackets[ch]:
+                last_ch = stack.pop()
+                if mapped_brackets[ch] != last_ch:
                     return False
 
         return len(stack) == 0
+        
