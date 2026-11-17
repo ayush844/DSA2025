@@ -15,9 +15,8 @@ class Solution:
 
             stack.append((start, h))
 
-        
         for it, ht in stack:
-            area = ht*(n-it)
-            max_area = max(area, max_area)
+            area = (n-it)*ht
+            max_area = max(max_area, area)
 
         return max_area
